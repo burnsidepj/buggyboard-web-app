@@ -68,6 +68,7 @@ New features **must** include Playwright tests covering the new behavior before 
 - [x] Spec written in `specs/features/`
 - [x] Backend implemented (bugs table, bugService, POST /api/bugs)
 - [x] Frontend implemented (Create bug button, CreateBugModal with title/severity/owner/description, validation, save/cancel)
+- [x] Playwright tests (cover the feature spec’s Gherkin scenarios)
 - [x] Linter/errors resolved
 
 ---

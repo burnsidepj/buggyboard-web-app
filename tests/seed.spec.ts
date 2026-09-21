@@ -6,7 +6,8 @@ if (!seedUser) {
   throw new Error("users.json must contain at least one user");
 }
 
-test("seed", async ({ loginPage }) => {
+test("seed", async ({ loginPage, boardPage }) => {
   await loginPage.goto();
   await loginPage.login(seedUser.username, seedUser.password);
+  await boardPage.newBugButton.waitFor();
 });
