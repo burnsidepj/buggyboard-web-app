@@ -25,4 +25,4 @@ BuggyBoard is a **full-stack Node.js** application written in **TypeScript**.
 
 ## Constraints
 
-- **Do not add Playwright (or other) tests during development.** Tests will be introduced as part of the course material later.
+- **Playwright tests ship with every feature.** When a feature is implemented, add tests that cover its new behavior. Follow `specs/engineering/test-automation-patterns.md`.

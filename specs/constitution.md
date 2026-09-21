@@ -23,6 +23,7 @@ All product and engineering context **shall** live in Markdown under `specs/`. N
 |                           | `engineering/tech-stack.md` – Stack and constraints.                                                     |
 |                           | `engineering/coding-standards.md` – Style, DDD, service layer, errors/linting.                           |
 |                           | `engineering/development-process.md` – Spec-first, feature-by-feature, review pauses, progress tracking. |
+|                           | `engineering/test-automation-patterns.md` – Playwright tests with every feature; POM, fixtures, atomic tests. |
 |                           | `engineering/pipelines.md` – CI/CD pipeline: GitHub Actions, triggers, caching, HTML reports, artifacts. |
 | **`specs/` (root)**       |                                                                                                          |
 |                           | `constitution.md` – This file: the supreme reference for how we work.                                    |
@@ -44,7 +45,7 @@ Cursor rules in `.cursor/rules/` (`.mdc` files with YAML frontmatter) **shall** 
 
 ## Article III: Progress is tracked in one place
 
-**`specs/PROGRESS.md`** is the single progress artifact. Each feature **shall** have a small checklist (e.g. spec written, backend, frontend, linter/errors resolved, review done). The AI **shall** update `PROGRESS.md` when a feature or step is completed and **shall** pause for human review after each feature.
+**`specs/PROGRESS.md`** is the single progress artifact. Each feature **shall** have a small checklist (e.g. spec written, backend, frontend, Playwright tests, linter/errors resolved, review done). The AI **shall** update `PROGRESS.md` when a feature or step is completed and **shall** pause for human review after each feature.
 
 ---
 
@@ -52,7 +53,7 @@ Cursor rules in `.cursor/rules/` (`.mdc` files with YAML frontmatter) **shall** 
 
 1. The human adds or edits a feature spec in `specs/features/`.
 2. The human directs the AI to implement using that spec (e.g. "Implement the feature in `@specs/features/XX-name.md`; follow `@specs/`").
-3. The AI reads the relevant specs, implements, updates `specs/PROGRESS.md`, and stops for human review.
+3. The AI reads the relevant specs, implements the feature, adds Playwright tests covering the new behavior (see `engineering/test-automation-patterns.md`), updates `specs/PROGRESS.md`, and stops for human review.
 4. The human reviews; when ready, the human directs the AI to the next feature spec.
 
 No feature **shall** be started until the previous one has been reviewed and the human has directed the next step.

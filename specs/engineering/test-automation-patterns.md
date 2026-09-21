@@ -1,5 +1,14 @@
 # Test Automation Patterns
 
+## Tests with every feature
+
+Whenever a new feature is implemented, Playwright tests **must** be added in the same delivery to cover the new behavior.
+
+- Treat the Gherkin scenarios and acceptance criteria in `specs/features/` as the coverage list. Each scenario is a candidate for one atomic Playwright test (see **Atomic tests** below and `specs/engineering/gherkin-standards.md`).
+- Do not treat a feature as complete until those tests exist, follow the patterns in this document, and pass.
+- Add or update page objects and fixtures when the feature introduces a new page, modal, or interaction.
+- Check off Playwright tests in `specs/PROGRESS.md` only after the new tests pass.
+
 ## Page Object Model
 
 All new and refactored Playwright tests **must** use the Page Object Model (POM) pattern.

@@ -2,6 +2,10 @@
 
 Checklists are updated as each feature is completed. After each feature, the AI pauses for human review.
 
+New features **must** include Playwright tests covering the new behavior before they are marked complete. Add this item to each new feature checklist:
+
+- [ ] Playwright tests (cover the feature spec’s Gherkin scenarios)
+
 ---
 
 ## Project setup
@@ -131,4 +135,4 @@ Checklists are updated as each feature is completed. After each feature, the AI 
 
 ---
 
-_(Add one section per feature; copy the checklist template above.)_
+_(Add one section per feature; copy the checklist template above, and include Playwright tests.)_

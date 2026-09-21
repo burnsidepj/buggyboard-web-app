@@ -26,3 +26,7 @@ When writing acceptance criteria in feature specs under `specs/features/`, follo
 ## Readability
 
 - Scenarios should **not** have an excessive number of lines. Keep each scenario short enough to be **readable and understandable** at a glance. Prefer multiple focused scenarios over one long scenario with many steps.
+
+## Relationship to Playwright tests
+
+Each Gherkin scenario is a candidate for one atomic Playwright test. When a feature is implemented, those scenarios **shall** be covered by tests that follow `specs/engineering/test-automation-patterns.md`.

@@ -18,6 +18,6 @@ The app theme is the **classic air-cooled Volkswagen Beetle**—a play on the wo
 
 - A user has **full access** to all bugs created in the app (no per-bug or per-project permissions in this version).
 
-## Out of Scope (for now)
+## Testing
 
-- No tests are added during development; tests will be written as part of the course material.
+Playwright tests are part of feature delivery. Every new feature includes tests that cover its new behavior. Conventions live in `specs/engineering/test-automation-patterns.md`.

@@ -26,8 +26,8 @@ The theme for the app will be the classic air-cooled Volkswagen Beetle as a play
 - The CSS framework for the frontend should be Tailwind.
 - The backend framework should be Express.
 - The database should be a SQLite database.
-- The test framework will be Playwright, but do NOT add tests during development,
-  since tests will need to be part of the course material.
+- The test framework is Playwright. Add Playwright tests with every new feature
+  so the new behavior is covered (see `specs/engineering/test-automation-patterns.md`).
 
 # Coding standards
 
@@ -44,7 +44,7 @@ I will write a spec for every feature I want to add to the project.
 The specs will include user stories, Gherkin scenarios, and other descriptions.
 I want these specs to be kept as artifacts of the process.
 I want the AI to set up the project and then work on each feature one by one.
-After each feature is complete, I want the AI to pause for me to review before I direct it to move onto the next feature.
+After each feature is complete—including Playwright tests for the new behavior—I want the AI to pause for me to review before I direct it to move onto the next feature.
 I also want the AI to track progress by saving progress to markdown files as checklists for what's been done.
 Perhaps there is a better way that the AI knows how to do this. I'm open to recommendations.
 Always ask me whenever there is uncertainty about a decision to make.
