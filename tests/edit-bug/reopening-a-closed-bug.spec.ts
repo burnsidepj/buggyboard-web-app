@@ -1,0 +1,40 @@
+import { test, expect } from "../fixtures";
+import { PASSWORD, USERNAME, uniqueTitle } from "../helpers/test-data";
+import { createBug, updateBug } from "../helpers/bugs-api";
+
+test.describe("Changing bug state", () => {
+  test("reopening-a-closed-bug", async ({
+    request,
+    loginPage,
+    boardPage,
+    editBugModal,
+  }) => {
+    // Arrange
+    const bug = await createBug(request, {
+      title: uniqueTitle("Closed then reopened"),
+      severity: "MID",
+      owner: USERNAME,
+      description: "Starts closed.",
+    });
+    await updateBug(request, bug, { state: "CLOSED" });
+    await loginPage.goto();
+    await loginPage.login(USERNAME, PASSWORD);
+    await boardPage.filterByClosed();
+    await boardPage.openBugByTitle(bug.title);
+
+    // Act
+    await editBugModal.selectState("Open");
+    await editBugModal.save();
+
+    // Assert
+    await expect(editBugModal.modal).toBeHidden();
+    await expect(boardPage.bugRows.filter({ hasText: bug.title })).toHaveCount(
+      0
+    );
+
+    await boardPage.filterByOpen();
+    await expect(boardPage.bugRows.filter({ hasText: bug.title })).toHaveCount(
+      1
+    );
+  });
+});
