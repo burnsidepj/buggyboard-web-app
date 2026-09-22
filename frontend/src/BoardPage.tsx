@@ -157,12 +157,14 @@ export function BoardPage() {
           <div className="flex justify-center mb-5">
             <div
               className="flex rounded-lg border border-stone-200 bg-white p-0.5 shadow-sm"
+              data-testid="state-filter"
               role="group"
               aria-label="Filter by bug state"
             >
               <button
                 type="button"
                 onClick={() => setStateFilter("OPEN")}
+                data-testid="state-filter-open"
                 className={`rounded-md px-4 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 ${
                   stateFilter === "OPEN"
                     ? "bg-primary text-stone-800 shadow-sm ring-1 ring-stone-200/50"
@@ -174,6 +176,7 @@ export function BoardPage() {
               <button
                 type="button"
                 onClick={() => setStateFilter("CLOSED")}
+                data-testid="state-filter-closed"
                 className={`rounded-md px-4 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 ${
                   stateFilter === "CLOSED"
                     ? "bg-primary text-stone-800 shadow-sm ring-1 ring-stone-200/50"
@@ -186,13 +189,14 @@ export function BoardPage() {
           </div>
           <section className="bg-white rounded-lg border border-stone-200 shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
-              <table className="w-full text-left" aria-label="Bugs">
+              <table className="w-full text-left" aria-label="Bugs" data-testid="bug-table">
                 <thead>
                   <tr className="border-b border-stone-200 bg-stone-50/80 text-stone-600 text-sm font-medium uppercase tracking-wide">
                     <th className="px-4 py-3 w-20" scope="col" aria-sort={sortColumn === "id" ? (sortDirection === "asc" ? "ascending" : "descending") : undefined}>
                       <button
                         type="button"
                         onClick={() => handleSortHeader("id")}
+                        data-testid="sort-id"
                         className="flex items-center gap-1 hover:text-stone-800 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 rounded"
                       >
                         ID
@@ -205,6 +209,7 @@ export function BoardPage() {
                       <button
                         type="button"
                         onClick={() => handleSortHeader("severity")}
+                        data-testid="sort-severity"
                         className="flex items-center gap-1 hover:text-stone-800 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 rounded"
                       >
                         Severity
@@ -217,6 +222,7 @@ export function BoardPage() {
                       <button
                         type="button"
                         onClick={() => handleSortHeader("title")}
+                        data-testid="sort-title"
                         className="flex items-center gap-1 hover:text-stone-800 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 rounded"
                       >
                         Title
@@ -229,6 +235,7 @@ export function BoardPage() {
                       <button
                         type="button"
                         onClick={() => handleSortHeader("owner")}
+                        data-testid="sort-owner"
                         className="flex items-center gap-1 hover:text-stone-800 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 rounded"
                       >
                         Owner
@@ -249,19 +256,20 @@ export function BoardPage() {
                   ) : sortedBugs.length === 0 && bugs.length > 0 ? (
                     <tr>
                       <td colSpan={4} className="px-4 py-6 text-center text-stone-500">
-                        No bugs matched.
+                        <span data-testid="board-no-matches">No bugs matched.</span>
                       </td>
                     </tr>
                   ) : sortedBugs.length === 0 ? (
                     <tr>
                       <td colSpan={4} className="px-4 py-6 text-center text-stone-500">
-                        No bugs.
+                        <span data-testid="board-empty">No bugs.</span>
                       </td>
                     </tr>
                   ) : (
                     sortedBugs.map((bug) => (
                       <tr
                         key={bug.id}
+                        data-testid={`bug-row-${bug.id}`}
                         role="button"
                         tabIndex={0}
                         onClick={() => handleRowClick(bug.id)}
@@ -273,17 +281,18 @@ export function BoardPage() {
                         }}
                         className="border-b border-stone-100 hover:bg-stone-50/80 transition-colors cursor-pointer"
                       >
-                        <td className="px-4 py-3 text-stone-500 font-mono text-sm">{bug.id}</td>
+                        <td className="px-4 py-3 text-stone-500 font-mono text-sm" data-testid="bug-cell-id">{bug.id}</td>
                         <td className="px-4 py-3">
                           <span
                             className={`severity-badge ${severityBadgeClass(bug.severity)}`}
+                            data-testid="bug-cell-severity"
                             data-severity={bug.severity.toUpperCase()}
                           >
                             {bug.severity.toUpperCase()}
                           </span>
                         </td>
-                        <td className="px-4 py-3 text-stone-800">{bug.title}</td>
-                        <td className="px-4 py-3 text-stone-600">{bug.owner}</td>
+                        <td className="px-4 py-3 text-stone-800" data-testid="bug-cell-title">{bug.title}</td>
+                        <td className="px-4 py-3 text-stone-600" data-testid="bug-cell-owner">{bug.owner}</td>
                       </tr>
                     ))
                   )}

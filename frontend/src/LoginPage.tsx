@@ -81,6 +81,7 @@ export function LoginPage() {
             </label>
             <input
               id="username"
+              data-testid="login-username"
               type="text"
               autoComplete="username"
               value={username}
@@ -99,6 +100,7 @@ export function LoginPage() {
             </label>
             <input
               id="password"
+              data-testid="login-password"
               type="password"
               autoComplete="current-password"
               value={password}
@@ -109,13 +111,14 @@ export function LoginPage() {
           </div>
 
           {error && (
-            <p className="text-sm text-red-600" role="alert">
+            <p className="text-sm text-red-600" role="alert" data-testid="login-error">
               {error}
             </p>
           )}
 
           <button
             type="submit"
+            data-testid="login-submit"
             disabled={loading}
             className="w-full rounded bg-primary py-2 px-4 font-medium text-stone-800 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >

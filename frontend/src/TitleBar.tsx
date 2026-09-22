@@ -45,6 +45,7 @@ export function TitleBar({
           <div className="flex items-center w-64 sm:w-80 rounded-lg border border-stone-200 bg-stone-50 focus-within:border-primary focus-within:bg-white focus-within:ring-1 focus-within:ring-primary transition-colors">
             <input
               type="text"
+              data-testid="search-input"
               role="search"
               value={searchValue}
               onChange={(e) => onSearchChange(e.target.value)}
@@ -55,6 +56,7 @@ export function TitleBar({
             <button
               type="button"
               onClick={() => onSearchChange("")}
+              data-testid="search-clear"
               aria-label="Clear search"
               className={`flex-shrink-0 rounded p-1.5 text-stone-500 hover:bg-stone-200 hover:text-stone-700 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 ${showClear ? "" : "invisible pointer-events-none"}`}
             >
@@ -69,6 +71,7 @@ export function TitleBar({
           <button
             type="button"
             onClick={onNewBug}
+            data-testid="new-bug-button"
             className="rounded-lg px-4 py-2 text-base font-medium text-stone-800 border border-primary/60 bg-primary/25 hover:bg-primary/35 hover:border-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
           >
             New Bug
@@ -80,6 +83,7 @@ export function TitleBar({
         <button
           type="button"
           onClick={handleLogout}
+          data-testid="logout-button"
           className="rounded-lg px-4 py-2 text-base font-medium text-stone-600 border border-stone-200 bg-white hover:bg-stone-50 hover:border-stone-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
         >
           Logout

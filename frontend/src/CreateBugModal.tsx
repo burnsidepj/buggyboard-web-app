@@ -105,11 +105,12 @@ export function CreateBugModal({
   return (
     <div
       className="bug-modal-overlay"
+      data-testid="create-bug-overlay"
       role="dialog"
       aria-modal="true"
       aria-labelledby="create-bug-modal-title"
     >
-      <div className="bug-modal-panel">
+      <div className="bug-modal-panel" data-testid="create-bug-modal">
         <div className="bug-modal-header">
           <h2 id="create-bug-modal-title" className="text-lg font-semibold text-stone-800">
             Create bug
@@ -117,6 +118,7 @@ export function CreateBugModal({
           <button
             type="button"
             onClick={handleCancel}
+            data-testid="create-bug-close"
             className="rounded p-1 text-stone-500 hover:bg-stone-100 hover:text-stone-700 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
             aria-label="Close"
           >
@@ -131,6 +133,7 @@ export function CreateBugModal({
             </label>
             <input
               id="bug-title"
+              data-testid="create-bug-title"
               ref={titleInputRef}
               type="text"
               value={title}
@@ -146,6 +149,7 @@ export function CreateBugModal({
             </label>
             <select
               id="bug-severity"
+              data-testid="create-bug-severity"
               value={severity}
               onChange={(e) => setSeverity(e.target.value as Severity)}
               className={`w-full rounded border border-stone-300 px-3 py-2 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary ${severitySelectClass(severity)}`}
@@ -164,6 +168,7 @@ export function CreateBugModal({
             </label>
             <input
               id="bug-owner"
+              data-testid="create-bug-owner"
               type="text"
               value={owner}
               onChange={(e) => setOwner(e.target.value)}
@@ -178,6 +183,7 @@ export function CreateBugModal({
             </label>
             <textarea
               id="bug-description"
+              data-testid="create-bug-description"
               rows={4}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -187,7 +193,7 @@ export function CreateBugModal({
             />
           </div>
           {validationErrors.length > 0 && (
-            <ul className="text-sm text-red-600" role="alert">
+            <ul className="text-sm text-red-600" role="alert" data-testid="create-bug-errors">
               {validationErrors.map((msg, i) => (
                 <li key={i}>{msg}</li>
               ))}
@@ -197,6 +203,7 @@ export function CreateBugModal({
             <button
               type="button"
               onClick={handleCancel}
+              data-testid="create-bug-cancel"
               className="rounded px-4 py-2 text-sm font-medium text-stone-700 bg-stone-200 hover:bg-stone-300 focus:outline-none focus:ring-2 focus:ring-stone-400 focus:ring-offset-2 disabled:opacity-50"
               disabled={loading}
             >
@@ -204,6 +211,7 @@ export function CreateBugModal({
             </button>
             <button
               type="submit"
+              data-testid="create-bug-save"
               className="rounded px-4 py-2 text-sm font-medium text-stone-800 bg-primary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={loading}
             >
