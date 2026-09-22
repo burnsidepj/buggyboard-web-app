@@ -105,6 +105,7 @@ app.put("/api/bugs/:id", (req, res) => {
   const state = typeof body.state === "string" ? body.state : "";
 
   const result = updateBug(id, { title, severity, owner, description, state });
+  // Creator is not accepted on update; the stored creator is preserved.
 
   if (result.success) {
     res.status(200).json(result.bug);
@@ -155,9 +156,16 @@ app.post("/api/bugs", (req, res) => {
   const title = typeof body.title === "string" ? body.title : "";
   const severity = typeof body.severity === "string" ? body.severity : "";
   const owner = typeof body.owner === "string" ? body.owner : "";
+  const creator = typeof body.creator === "string" ? body.creator : "";
   const description = typeof body.description === "string" ? body.description : "";
 
-  const result = createBug({ title, severity: severity as "high" | "mid" | "low", owner, description });
+  const result = createBug({
+    title,
+    severity: severity as "high" | "mid" | "low",
+    owner,
+    creator,
+    description,
+  });
 
   if (result.success) {
     res.status(201).json(result.bug);
@@ -174,6 +182,9 @@ app.post("/api/bugs", (req, res) => {
       return;
     case "BLANK_OWNER":
       res.status(400).json({ error: "blank_owner", message: "Owner is required." });
+      return;
+    case "BLANK_CREATOR":
+      res.status(400).json({ error: "blank_creator", message: "Creator is required." });
       return;
     case "BLANK_DESCRIPTION":
       res.status(400).json({ error: "blank_description", message: "Description is required." });

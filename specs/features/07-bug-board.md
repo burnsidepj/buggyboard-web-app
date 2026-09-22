@@ -14,6 +14,7 @@ The table should display the following information for each bug from left to rig
 - Severity
 - Title
 - Owner
+- Creator
 
 
 # Out of Scope
@@ -33,14 +34,15 @@ Scenario: Board page displays a bugs table with the correct columns
   And the table has a column for Severity
   And the table has a column for Title
   And the table has a column for Owner
-  And the columns are ordered from left to right: ID, Severity, Title, Owner
+  And the table has a column for Creator
+  And the columns are ordered from left to right: ID, Severity, Title, Owner, Creator
 
 Scenario: Board page shows all bugs from the database
   Given the user is authenticated into the app
   And there are bugs in the database
   When the user is on the board page
   Then the table displays one row per bug
-  And each row shows that bug's ID, severity, title, and owner
+  And each row shows that bug's ID, severity, title, owner, and creator
 
 Scenario: Board page shows an empty table when there are no bugs
   Given the user is authenticated into the app

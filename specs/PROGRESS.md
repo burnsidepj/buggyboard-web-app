@@ -137,3 +137,13 @@ New features **must** include Playwright tests covering the new behavior before 
 ---
 
 _(Add one section per feature; copy the checklist template above, and include Playwright tests.)_
+
+---
+
+## Feature: Bug creator (14-bug-creator.md)
+
+- [x] Spec written in `specs/features/`
+- [x] Backend implemented (creator column; createBug sets creator; updateBug does not change creator; GET/list include creator)
+- [x] Frontend implemented (Create sends current user as creator; Edit shows Creator read-only; board column to the right of Owner, sortable)
+- [x] Playwright tests (cover the feature spec’s Gherkin scenarios)
+- [x] Linter/errors resolved

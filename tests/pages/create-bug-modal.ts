@@ -6,6 +6,7 @@ export class CreateBugModal {
   readonly titleInput: Locator;
   readonly severitySelect: Locator;
   readonly ownerInput: Locator;
+  readonly creatorInput: Locator;
   readonly descriptionInput: Locator;
   readonly saveButton: Locator;
   readonly cancelButton: Locator;
@@ -18,6 +19,7 @@ export class CreateBugModal {
     this.titleInput = this.dialog.getByRole("textbox", { name: "Title" });
     this.severitySelect = this.dialog.getByLabel("Severity");
     this.ownerInput = this.dialog.getByRole("textbox", { name: "Owner" });
+    this.creatorInput = this.dialog.getByRole("textbox", { name: "Creator" });
     this.descriptionInput = this.dialog.getByRole("textbox", { name: "Description" });
     this.saveButton = this.dialog.getByRole("button", { name: "Save" });
     this.cancelButton = this.dialog.getByRole("button", { name: "Cancel" });

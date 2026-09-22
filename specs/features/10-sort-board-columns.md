@@ -18,7 +18,7 @@ So that I can quickly organize and find bugs.
   - If the column was not sorted, the first click should make the sorting ascending.
 - When a column is sorted, all the bugs in the table should follow the appropriate sorting type.
 - Only one column may be sorted at a time.
-- All four columns (ID, Severity, Title, Owner) may be sorted.
+- All five columns (ID, Severity, Title, Owner, Creator) may be sorted.
 - For Severity:
   - Ascending means LOW, MID, HIGH
   - Descending means HIGH, MID, LOW
@@ -77,7 +77,7 @@ Scenario: Severity descending order is HIGH then MID then LOW
   When the user clicks the Severity column header again (descending)
   Then the bugs are displayed in order HIGH, then MID, then LOW
 
-Scenario: All four columns are sortable
+Scenario: All five columns are sortable
   Given the user is authenticated into the app
   And the user is on the board page
   And there are bugs in the database
@@ -85,5 +85,6 @@ Scenario: All four columns are sortable
   And the Severity column header is clickable and sortable
   And the Title column header is clickable and sortable
   And the Owner column header is clickable and sortable
+  And the Creator column header is clickable and sortable
 
 

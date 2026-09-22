@@ -31,6 +31,7 @@ test.describe("Create bug", () => {
         title,
         severity: "HIGH",
         owner: seedUser.username,
+        creator: seedUser.username,
         description,
       }),
     );

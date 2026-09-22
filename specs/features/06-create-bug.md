@@ -13,7 +13,8 @@ A bug needs the following information:
 2. *Title*: a concise one-line description or summary of the issue
 3. *Severity*: HIGH, MID, or LOW (displayed in the UI in all caps)
 4. *Owner*: the name of the user who owns the bug; defaults to the current user when creating a new bug
-5. *Description*: a body of text explaining the issue
+5. *Creator*: the name of the user who created the bug; automatically set to the current user when the bug is created; cannot be edited (see `specs/features/14-bug-creator.md`)
+6. *Description*: a body of text explaining the issue
 
 
 # Workflow Design
@@ -23,6 +24,7 @@ they should be able to create a new bug from the board page by clicking a **"New
 The app should then present a modal with fields for the user to input the bug data.
 The severity field is a dropdown (HIGH, MID, LOW); the **selected severity must be displayed with the same color coding as on the board** (HIGH = strong terracotta, MID = amber, LOW = muted sage), using the CSS custom properties in specs/features/08-board-severity.md.
 Each field is required and cannot be left blank.
+The modal does **not** include an editable Creator field; when the bug is saved, the app sets Creator to the current user (see `specs/features/14-bug-creator.md`).
 The modal should have "save" and "cancel" buttons at the bottom.
 The "save" button should save the bug to the database and close the modal.
 The "cancel" button should close the modal and *not* save the bug to the database.
@@ -58,7 +60,7 @@ Scenario: Create-bug modal defaults owner to the current user
   And the owner field is pre-filled with "alice"
 
 Scenario: User can save a new bug with all required fields
-  Given the user is authenticated into the app
+  Given the user is authenticated into the app as "alice"
   And the user is on the board page
   And the create-bug modal is open
   When the user enters "Login fails with special characters" in the title field
@@ -66,6 +68,7 @@ Scenario: User can save a new bug with all required fields
   And the user enters "When I use < and > in my password, login fails." in the description field
   And the user clicks the save button
   Then the bug is saved to the database with the entered data
+  And the bug's Creator is "alice"
   And the modal is closed
 
 Scenario: User can cancel creating a bug without saving

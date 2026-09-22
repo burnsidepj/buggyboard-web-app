@@ -9,6 +9,7 @@ export interface Bug {
   title: string;
   severity: string;
   owner: string;
+  creator: string;
   description: string;
   state: string;
 }
@@ -302,6 +303,19 @@ export function EditBugModal({ bug, onClose, onSaved }: EditBugModalProps) {
               className="w-full rounded border border-stone-300 px-3 py-2 text-stone-800 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
               disabled={loading}
               autoComplete="off"
+            />
+          </div>
+          <div>
+            <label htmlFor="edit-bug-creator" className="block text-sm font-medium text-stone-700 mb-1">
+              Creator
+            </label>
+            <input
+              id="edit-bug-creator"
+              type="text"
+              value={bug.creator}
+              readOnly
+              className="w-full rounded border border-stone-200 px-3 py-2 text-stone-500 bg-stone-50 cursor-not-allowed"
+              aria-readonly="true"
             />
           </div>
           <div>

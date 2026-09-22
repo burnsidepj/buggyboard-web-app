@@ -11,10 +11,11 @@ interface BugRow {
   title: string;
   severity: string;
   owner: string;
+  creator: string;
   state: string;
 }
 
-type SortColumn = "id" | "severity" | "title" | "owner";
+type SortColumn = "id" | "severity" | "title" | "owner" | "creator";
 type SortDirection = "asc" | "desc";
 
 /** Severity priority for sort: LOW=0, MID=1, HIGH=2 (ascending = LOW then MID then HIGH). */
@@ -69,6 +70,9 @@ function sortBugs(bugs: BugRow[], column: SortColumn, direction: SortDirection):
         break;
       case "owner":
         cmp = a.owner.localeCompare(b.owner);
+        break;
+      case "creator":
+        cmp = a.creator.localeCompare(b.creator);
         break;
     }
     return direction === "asc" ? cmp : -cmp;
@@ -132,6 +136,7 @@ export function BoardPage() {
           title: string;
           severity: string;
           owner: string;
+          creator: string;
           state: string;
         }>;
         setBugs(data);
@@ -153,7 +158,7 @@ export function BoardPage() {
         onSearchChange={setSearchQuery}
       />
       <main className="flex-1 p-4 md:p-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="flex justify-center mb-5">
             <div
               className="flex rounded-lg border border-stone-200 bg-white p-0.5 shadow-sm"
@@ -237,24 +242,36 @@ export function BoardPage() {
                         </span>
                       </button>
                     </th>
+                    <th className="px-4 py-3 w-40" scope="col" aria-sort={sortColumn === "creator" ? (sortDirection === "asc" ? "ascending" : "descending") : undefined}>
+                      <button
+                        type="button"
+                        onClick={() => handleSortHeader("creator")}
+                        className="flex items-center gap-1 hover:text-stone-800 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 rounded"
+                      >
+                        Creator
+                        <span className="inline-block w-4 text-center" aria-hidden="true">
+                          {sortColumn === "creator" ? (sortDirection === "asc" ? "↑" : "↓") : "\u00A0"}
+                        </span>
+                      </button>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {loading ? (
                     <tr>
-                      <td colSpan={4} className="px-4 py-6 text-center text-stone-500">
+                      <td colSpan={5} className="px-4 py-6 text-center text-stone-500">
                         Loading…
                       </td>
                     </tr>
                   ) : sortedBugs.length === 0 && bugs.length > 0 ? (
                     <tr>
-                      <td colSpan={4} className="px-4 py-6 text-center text-stone-500">
+                      <td colSpan={5} className="px-4 py-6 text-center text-stone-500">
                         No bugs matched.
                       </td>
                     </tr>
                   ) : sortedBugs.length === 0 ? (
                     <tr>
-                      <td colSpan={4} className="px-4 py-6 text-center text-stone-500">
+                      <td colSpan={5} className="px-4 py-6 text-center text-stone-500">
                         No bugs.
                       </td>
                     </tr>
@@ -284,6 +301,7 @@ export function BoardPage() {
                         </td>
                         <td className="px-4 py-3 text-stone-800">{bug.title}</td>
                         <td className="px-4 py-3 text-stone-600">{bug.owner}</td>
+                        <td className="px-4 py-3 text-stone-600">{bug.creator}</td>
                       </tr>
                     ))
                   )}
@@ -296,6 +314,7 @@ export function BoardPage() {
       <CreateBugModal
         isOpen={createModalOpen}
         defaultOwner={user?.username ?? ""}
+        creator={user?.username ?? ""}
         onClose={() => setCreateModalOpen(false)}
         onSaved={fetchBugs}
       />

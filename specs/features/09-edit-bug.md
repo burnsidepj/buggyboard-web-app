@@ -11,6 +11,7 @@ So that I can view all its data and update it for review and analysis.
 - Opening a bug shows a modal that is similar in design to the modal for creating a bug.
 - The modal title is **"Edit bug #&lt;id&gt;"** with the bug's ID number interpolated (e.g. "Edit bug #1").
 - This modal shows the bug's ID as read-only.
+- This modal shows the bug's Creator as read-only (see `specs/features/14-bug-creator.md`).
 - All other fields are editable.
 - The severity field uses the same control as the create-bug modal (dropdown with HIGH, MID, LOW). The **selected severity in the dropdown must be displayed with the same color coding as on the board**: the dropdown’s text (and optionally a light background tint) must use the same severity colors (HIGH = strong terracotta, MID = amber, LOW = muted sage) via the CSS custom properties in specs/features/08-board-severity.md, so that the modal and board look consistent.
 - The bottom of the modal has buttons for "save" and "cancel".
@@ -37,13 +38,14 @@ Scenario: User can open a bug from the board by clicking its row
   When the user clicks on a bug's row in the board table
   Then a modal is displayed for viewing and editing the bug
   And the modal title is "Edit bug #&lt;id&gt;" with the bug's ID (e.g. "Edit bug #1")
-  And the modal shows the bug's ID, title, severity, owner, and description
+  And the modal shows the bug's ID, title, severity, owner, creator, and description
   And the modal has a save button and a cancel button
 
 Scenario: Edit-bug modal shows ID as read-only and other fields as editable
   Given the user is authenticated into the app
   And the edit-bug modal is open for a bug
   Then the bug's ID is displayed and cannot be edited
+  And the bug's Creator is displayed and cannot be edited
   And the title field is editable
   And the severity field is editable
   And the owner field is editable

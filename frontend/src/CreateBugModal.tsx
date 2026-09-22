@@ -5,6 +5,7 @@ export type Severity = "high" | "mid" | "low";
 interface CreateBugModalProps {
   isOpen: boolean;
   defaultOwner: string;
+  creator: string;
   onClose: () => void;
   onSaved: () => void;
 }
@@ -18,6 +19,7 @@ function severitySelectClass(severity: Severity): string {
 export function CreateBugModal({
   isOpen,
   defaultOwner,
+  creator,
   onClose,
   onSaved,
 }: CreateBugModalProps) {
@@ -79,6 +81,7 @@ export function CreateBugModal({
           title: title.trim(),
           severity,
           owner: owner.trim(),
+          creator: creator.trim(),
           description: description.trim(),
         }),
       });

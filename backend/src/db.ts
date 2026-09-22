@@ -22,8 +22,14 @@ export function initBugsTable(): void {
       title TEXT NOT NULL,
       severity TEXT NOT NULL CHECK (severity IN ('HIGH', 'MID', 'LOW')),
       owner TEXT NOT NULL,
+      creator TEXT NOT NULL,
       description TEXT NOT NULL,
       state TEXT NOT NULL DEFAULT 'OPEN' CHECK (state IN ('OPEN', 'CLOSED'))
     )
   `);
+
+  const columns = db.prepare("PRAGMA table_info(bugs)").all() as Array<{ name: string }>;
+  if (!columns.some((column) => column.name === "creator")) {
+    db.exec("ALTER TABLE bugs ADD COLUMN creator TEXT NOT NULL DEFAULT ''");
+  }
 }
